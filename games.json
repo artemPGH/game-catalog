@@ -4,13 +4,13 @@
     "name": "My Demo Game",
     "developer": "Artem Studio",
     "tags": ["indie", "singleplayer"],
-    "icon": "https://artemPGH.github.io/game-catalog/icons/my_demo.png",
-    "cover": "https://artemPGH.github.io/game-catalog/covers/my_demo.jpg",
+    "icon": "https://artemPGH.github.io/game-catalog/icons/r.png",
+    "cover": "https://artemPGH.github.io/game-catalog/covers/r.png",
     "description": "Небольшая демо-игра. Нажми кнопку — и увидишь приветствие!",
     "download": {
       "url": "https://artemPGH.github.io/game-catalog/my_demo_win.zip",
-      "size": 9848743,
-      "sha256": "c36f194c67456daca8476f7084a350bd5c9bcabf3f68bf081435d742df0c329b"
+      "size": 98487343,
+      "sha256": "c36f194c674560daca8476f7084a3508d5c9bcabf3f68bf081435d742df0c329b"
     },
     "exec": { "win": "MyDemoGame/MyDemoGame.exe" },
     "version": "1.0.1"
@@ -20,6 +20,6 @@
     "name": "Roblox",
     "tags": ["sandbox", "online"],
     "url": "roblox://",
-    "description": "Ссылочная запись. Откроет установленный Roblox."
+    "description": "Ссылочная запись: откроет установленный Roblox."
   }
 ]
