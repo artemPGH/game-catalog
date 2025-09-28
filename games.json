@@ -5,8 +5,8 @@
     "tags": ["indie", "singleplayer"],
     "download": {
       "url": "https://artemPGH.github.io/game-catalog/my_demo_win.zip",
-      "size": 98487343,
-      "sha256": "C36F194C674560DACA8476F7084A3508D5C9BCABF3F68BF081435D742DF0C329B"
+      "size": 9848743,
+      "sha256": " C36F194C67456DACA8476F7084A350BD5C9BCABF3F6B8F0B1435D742DF0C329B"
     },
     "exec": { "win": "MyDemoGame/MyDemoGame.exe" },
     "version": "1.0.1"
