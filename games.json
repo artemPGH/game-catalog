@@ -9,7 +9,7 @@
       "sha256": "C36F194C67456DACA8476F7084A350BD5C9BCABF3F6B8F0B1435D742DF0C329B"
     },
     "exec": { "win": "MyDemoGame/MyDemoGame.exe" },
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   {
     "id": "roblox",
