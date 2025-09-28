@@ -4,7 +4,7 @@
     "name": "My Demo Game",
     "tags": ["indie", "singleplayer"],
     "download": {
-      "url": "http://127.0.0.1:8000/my_demo_win.zip",
+      "url": "http://github.com/artemPGH/game-catalog/edit/main/my_demo_win.zip",
       "size": 9848743,
       "sha256": "C36F194C67456DACA8476F7084A350BD5C9BCABF3F6B8F0B1435D742DF0C329B"
     },
