@@ -10,7 +10,8 @@
     "download": {
       "url": "https://artemPGH.github.io/game-catalog/my_demo_win.zip",
       "size": 98487343,
-      "sha256": "C36F194C674560DACA8476F7084A350B5C9BCABF3F68BF081435D742DF0C329B"
+      "sha256": "c36f194c67456daca8476f7084a350bd5c9bcabf3f68bf081435d742df0c329b"
+"
     },
     "exec": { "win": "MyDemoGame/MyDemoGame.exe" },
     "version": "1.0.1"
