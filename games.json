@@ -10,5 +10,11 @@
     },
     "exec": { "win": "MyDemoGame/MyDemoGame.exe" },
     "version": "1.0.0"
+  },
+  {
+    "id": "roblox",
+    "name": "Roblox",
+    "tags": ["sandbox", "online"],
+    "url": "roblox://"
   }
 ]
