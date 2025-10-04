@@ -1,192 +1,451 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loom Launcher — релиз</title>
-  <meta name="description" content="Релиз Loom Launcher. Таймер обратного отсчёта и кнопка скачивания в момент выхода." />
-  <meta property="og:title" content="Loom Launcher — релиз" />
-  <meta property="og:description" content="Тёплый и уютный лаунчер игр. Кнопка скачивания откроется в момент релиза." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#ff7a3d" />
-  <style>
-    :root{
-      --bg1:#0f0f12;--bg2:#1a1c22;--card:#15161b;--muted:#a7abb4;--accent:#ff7a3d;--accent-2:#ffd39f;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; color:#fff;
-      background: radial-gradient(1200px 800px at 80% -10%, #242333 0%, transparent 50%),
-                  radial-gradient(800px 600px at -10% 90%, #2b2838 0%, transparent 50%),
-                  linear-gradient(160deg, var(--bg1), var(--bg2));
-      display:flex; align-items:center; justify-content:center; padding:24px;
-    }
-    .card{
-      width:min(920px,100%); background:rgba(21,22,27,.7); backdrop-filter: blur(10px);
-      border:1px solid rgba(255,255,255,.06); border-radius:18px; padding:28px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
-    }
-    .brand{display:flex; gap:16px; align-items:center; margin-bottom:10px}
-    .logo{
-      width:54px; height:54px; border-radius:14px; display:grid; place-items:center;
-      background: conic-gradient(from 200deg, #ff9e5f, #ff7a3d 40%, #e65100 70%, #ff9e5f);
-      box-shadow: inset 0 2px 6px rgba(0,0,0,.25), 0 6px 18px rgba(255,122,61,.25);
-    }
-    .logo svg{filter: drop-shadow(0 2px 2px rgba(0,0,0,.25))}
-    h1{margin:0; font-size:24px; line-height:1.2}
-    .sub{color:var(--muted); margin:2px 0 0; font-size:14px}
-    .row{display:flex; gap:24px; flex-wrap:wrap; margin-top:22px}
-    .col{flex:1 1 360px}
-    .block{
-      background: rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:14px; padding:18px;
-    }
-    .label{color:var(--muted); font-size:12px; letter-spacing:.08em; text-transform:uppercase}
-    .timer{
-      display:flex; gap:10px; margin-top:12px; flex-wrap:wrap
-    }
-    .tbox{
-      background: rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.08);
-      border-radius:12px; min-width:90px; padding:14px 10px; text-align:center
-    }
-    .num{font-size:28px; font-weight:700}
-    .cap{font-size:12px; color:var(--muted)}
-    .btns{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
-    .btn{
-      padding:12px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(180deg, rgba(255,122,61,.95), rgba(230,81,0,.95));
-      color:#000; font-weight:700; box-shadow: 0 8px 24px rgba(255,122,61,.35);
-      text-decoration:none; display:inline-flex; align-items:center; gap:10px;
-      transform:translateY(0); transition:transform .15s ease, box-shadow .15s ease;
-      cursor:pointer; user-select:none;
-    }
-    .btn:hover{transform:translateY(-1px); box-shadow: 0 12px 30px rgba(255,122,61,.45)}
-    .btn[disabled]{opacity:.5; pointer-events:none}
-    .hint{color:var(--muted); font-size:12px; margin-top:8px}
-    .sep{height:1px; background:rgba(255,255,255,.06); margin:18px 0}
-    .foot{display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted); font-size:12px}
-    code{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:4px 6px; border-radius:8px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Loom Launcher — релиз</title>
+<meta name="description" content="Релиз Loom Launcher. Таймер, салюты, кнопка скачивания и подробная инструкция." />
+<meta name="theme-color" content="#ff7a3d" />
+
+<style>
+  :root{
+    --bg1:#0e0f13; --bg2:#141624; --bg3:#1b1e30;
+    --card: rgba(18,19,26,.72);
+    --border: rgba(255,255,255,.08);
+    --muted:#a7abb4;
+    --accent:#ff7a3d;
+    --accent-2:#ffd39f;
+    --good:#3ddc97;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:#fff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background:
+      radial-gradient(1200px 800px at 80% -10%, #2c2d4b 0%, transparent 50%),
+      radial-gradient(900px 700px at -10% 90%, #2a2438 0%, transparent 50%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+    overflow-x:hidden;
+  }
+
+  /* динамический фон звёзд */
+  .stars, .twinkling, .gradient {
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+  }
+  .stars {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><circle cx="2" cy="2" r="2" fill="white" opacity=".9"/></svg>');
+    background-size: 160px 160px;
+    animation: drift 120s linear infinite;
+    opacity:.25;
+  }
+  .twinkling {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><circle cx="2" cy="2" r="2" fill="white" opacity=".6"/></svg>');
+    background-size: 320px 320px;
+    animation: twinkle 4s ease-in-out infinite alternate;
+    opacity:.15;
+  }
+  @keyframes drift {from{transform:translateY(0)} to{transform:translateY(160px)}}
+  @keyframes twinkle {from{opacity:.10} to{opacity:.25}}
+
+  main{
+    position:relative; z-index:1;
+    min-height:100%;
+    display:grid; place-items:center; padding:28px;
+  }
+  .card{
+    width:min(980px,100%);
+    background: var(--card);
+    backdrop-filter: blur(12px);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:28px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  }
+  .brand{display:flex; gap:16px; align-items:center; margin-bottom:6px}
+  .logo{
+    width:58px; height:58px; border-radius:16px; display:grid; place-items:center;
+    background: conic-gradient(from 210deg, #ff9e5f, #ff7a3d 40%, #e65100 70%, #ff9e5f);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,.25), 0 6px 18px rgba(255,122,61,.25);
+  }
+  .logo svg{filter: drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+  h1{margin:0; font-size:26px; line-height:1.2}
+  .sub{color:var(--muted); margin:4px 0 0; font-size:14px}
+
+  .row{display:flex; gap:24px; flex-wrap:wrap; margin-top:24px}
+  .col{flex:1 1 360px}
+  .block{
+    background: rgba(255,255,255,.03);
+    border:1px solid var(--border);
+    border-radius:14px; padding:18px;
+  }
+  .label{color:var(--muted); font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+  .timer{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+  .tbox{
+    background: rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.08);
+    border-radius:12px; min-width:92px; padding:14px 12px; text-align:center
+  }
+  .num{font-size:30px; font-weight:800}
+  .cap{font-size:12px; color:var(--muted)}
+
+  .btns{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+  .btn{
+    padding:12px 18px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+    background:linear-gradient(180deg, rgba(255,122,61,.98), rgba(230,81,0,.98));
+    color:#0c0c0c; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:10px;
+    transform:translateY(0) scale(1); transition:transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+    box-shadow: 0 10px 26px rgba(255,122,61,.45);
+    cursor:pointer; user-select:none;
+  }
+  .btn:hover{transform:translateY(-1px) scale(1.02)}
+  .btn[disabled]{opacity:.55; pointer-events:none}
+  .btn.secondary{
+    background:transparent; color:#fff; border-color:rgba(255,255,255,.24); box-shadow:none;
+  }
+  .hint{color:var(--muted); font-size:12px; margin-top:8px}
+  .sep{height:1px; background:rgba(255,255,255,.08); margin:18px 0}
+  .foot{display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted); font-size:12px}
+  code{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:4px 6px; border-radius:8px}
+
+  /* кнопка-гигант при релизе */
+  .mega {
+    position: fixed; inset:0; display:none; z-index:3;
+    background: radial-gradient(1200px 800px at 50% -20%, rgba(255,143,92,.25), transparent 55%);
+    align-items:center; justify-content:center;
+  }
+  .mega .btn {
+    transform: scale(1.0);
+    font-size: clamp(22px, 3vw, 36px);
+    padding: 18px 28px;
+    border-radius: 16px;
+    box-shadow: 0 18px 50px rgba(255,122,61,.6);
+    animation: bounce 0.9s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0) scale(1.0); }
+    50% { transform: translateY(-8px) scale(1.04); }
+  }
+
+  /* холст фейерверков */
+  #fx {
+    position: fixed; inset:0; z-index:2; pointer-events:none; display:none;
+  }
+
+  /* модалка */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; z-index:4;
+  }
+  .modal{
+    position:fixed; inset:0; display:none; place-items:center; z-index:5; padding:24px;
+  }
+  .modal .box{
+    width:min(900px,100%); max-height:85vh; overflow:auto;
+    background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px;
+    box-shadow:0 10px 40px rgba(0,0,0,.5);
+  }
+  .modal h2{margin:0 0 6px 0}
+  .modal .muted{color:var(--muted)}
+  .modal .actions{display:flex; justify-content:flex-end; gap:10px; margin-top:14px}
+  .kbd{padding:2px 6px; border-radius:6px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+
+  /* панель звука */
+  .soundbar{
+    display:flex; align-items:center; gap:10px; margin-top:10px; color:var(--muted); font-size:13px;
+  }
+  .soundbar button{padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background:transparent; color:#fff; cursor:pointer}
+  .soundbar button:hover{background:rgba(255,255,255,.06)}
+</style>
 </head>
 <body>
-  <main class="card">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">
-        <!-- упрощённое SVG-лого «шпуля» -->
-        <svg width="30" height="30" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <path d="M12 8c0 0 12-8 24 0s12 32 0 40-24 0-24 0-4-20 0-40z" fill="#3b1600" opacity=".25"/>
-          <path d="M14 10c0 0 11-7 22 0s11 28 0 35-22 0-22 0-4-18 0-35z" fill="#ff9e5f" stroke="#7a2a06" stroke-width="3" />
-          <rect x="22" y="20" width="20" height="18" rx="4" fill="#7a2a06"/>
-          <rect x="25" y="24" width="14" height="2" rx="1" fill="#ffcf9e"/>
-          <rect x="25" y="28" width="14" height="2" rx="1" fill="#ffcf9e"/>
-          <rect x="25" y="32" width="14" height="2" rx="1" fill="#ffcf9e"/>
-          <circle cx="40" cy="18" r="2" fill="#7a2a06"/>
-          <path d="M44 43c6 6 10 6 12 4" stroke="#7a2a06" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div>
-        <h1>Loom Launcher — релиз</h1>
-        <p class="sub">Тёплый и уютный лаунчер игр. Кнопка «Скачать» появится ровно в момент релиза.</p>
-      </div>
-    </div>
+  <div class="stars"></div><div class="twinkling"></div>
 
-    <div class="row">
-      <section class="col block">
-        <div class="label">До релиза осталось</div>
-        <div class="timer" id="timer">
-          <div class="tbox"><div class="num" id="d">0</div><div class="cap">дней</div></div>
-          <div class="tbox"><div class="num" id="h">0</div><div class="cap">часов</div></div>
-          <div class="tbox"><div class="num" id="m">0</div><div class="cap">минут</div></div>
-          <div class="tbox"><div class="num" id="s">0</div><div class="cap">секунд</div></div>
+  <main>
+    <section class="card">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- лого-шпуля -->
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M12 8c0 0 12-8 24 0s12 32 0 40-24 0-24 0-4-20 0-40z" fill="#3b1600" opacity=".25"/>
+            <path d="M14 10c0 0 11-7 22 0s11 28 0 35-22 0-22 0-4-18 0-35z" fill="#ff9e5f" stroke="#7a2a06" stroke-width="3" />
+            <rect x="22" y="20" width="20" height="18" rx="4" fill="#7a2a06"/>
+            <rect x="25" y="24" width="14" height="2" rx="1" fill="#ffcf9e"/>
+            <rect x="25" y="28" width="14" height="2" rx="1" fill="#ffcf9e"/>
+            <rect x="25" y="32" width="14" height="2" rx="1" fill="#ffcf9e"/>
+            <circle cx="40" cy="18" r="2" fill="#7a2a06"/>
+            <path d="M44 43c6 6 10 6 12 4" stroke="#7a2a06" stroke-width="3" stroke-linecap="round"/>
+          </svg>
         </div>
-
-        <div class="btns">
-          <a id="dl" class="btn" href="#" download disabled>
-            <span>⬇️ Скачать Loom Launcher</span>
-          </a>
-          <a class="btn" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.24)"
-             href="#faq">Подробнее</a>
+        <div>
+          <h1>Loom Launcher — релиз</h1>
+          <p class="sub">Тёплый, уютный игровой лаунчер. Кнопка «Скачать» появится ровно в момент релиза.</p>
         </div>
-        <div class="hint">Кнопка станет активной в момент выхода. Время берётся из вашей временной зоны.</div>
-      </section>
+      </div>
 
-      <section class="col block">
-        <div class="label">Что будет в релизе</div>
-        <ul style="margin:10px 0 0 18px; line-height:1.6;">
-          <li>Скачивание и обновление игр</li>
-          <li>Проверка целостности (SHA-256)</li>
-          <li>Самообновление лаунчера</li>
-          <li>Темы и уютный внешний вид</li>
-        </ul>
-        <div class="sep"></div>
-        <div class="label" id="faq">Как это работает</div>
-        <p style="margin:10px 0 0; color:var(--muted);">
-          До заданного времени доступ закрыт. Как только таймер дойдёт до нуля — кнопка «Скачать»
-          станет активной и откроет загрузку установочного файла.
-        </p>
-      </section>
-    </div>
+      <div class="row">
+        <section class="col block">
+          <div class="label">До релиза осталось</div>
+          <div class="timer" id="timer">
+            <div class="tbox"><div class="num" id="d">0</div><div class="cap">дней</div></div>
+            <div class="tbox"><div class="num" id="h">00</div><div class="cap">часов</div></div>
+            <div class="tbox"><div class="num" id="m">00</div><div class="cap">минут</div></div>
+            <div class="tbox"><div class="num" id="s">00</div><div class="cap">секунд</div></div>
+          </div>
 
-    <div class="sep"></div>
-    <footer class="foot">
-      <div>© <span id="yr"></span> Loom Launcher</div>
-      <div>Время релиза: <code id="when">—</code></div>
-    </footer>
+          <div class="btns">
+            <a id="dl" class="btn" href="#" download disabled>⬇️ Скачать Loom Launcher</a>
+            <button id="more" class="btn secondary" type="button">Подробнее</button>
+          </div>
+          <div class="soundbar">
+            <button id="snd" type="button">🔊 Включить звук</button>
+            <span>Небольшая музыка при релизе (можно отключить).</span>
+          </div>
+          <div class="hint">Кнопка станет активной в момент выхода. Время берётся из вашей временной зоны.</div>
+        </section>
+
+        <section class="col block">
+          <div class="label">Что будет в релизе</div>
+          <ul style="margin:10px 0 0 18px; line-height:1.6;">
+            <li>Скачивание и обновление игр</li>
+            <li>Проверка целостности (SHA-256)</li>
+            <li>Самообновление лаунчера</li>
+            <li>Темы и акцентные цвета</li>
+          </ul>
+          <div class="sep"></div>
+          <div class="label">Дата релиза</div>
+          <p id="when" style="margin:8px 0 0; color:var(--muted);">—</p>
+        </section>
+      </div>
+
+      <div class="sep"></div>
+      <footer class="foot">
+        <div>© <span id="yr"></span> Loom Launcher</div>
+        <div>Подпишись на релиз: <code>github.com/&lt;USER&gt;/&lt;REPO&gt;</code></div>
+      </footer>
+    </section>
   </main>
 
-  <noscript>
-    <div style="position:fixed;inset:0;background:#111;color:#fff;display:grid;place-items:center;padding:24px;z-index:9999">
-      Для этой страницы нужен JavaScript. Включите его, пожалуйста.
+  <!-- холст фейерверков -->
+  <canvas id="fx"></canvas>
+  <!-- гигантская кнопка -->
+  <div class="mega" id="mega"><a id="megaBtn" class="btn" href="#" download>⬇️ Скачать Loom Launcher</a></div>
+
+  <!-- Модалка «Подробнее» -->
+  <div class="modal-backdrop" id="mbg"></div>
+  <div class="modal" id="modal">
+    <div class="box">
+      <h2>Как установить Loom Launcher</h2>
+      <p class="muted">Если антивирус/SmartScreen жалуется — это типичная реакция на новый .exe, который ещё «неизвестен системе».</p>
+      <ol style="line-height:1.7;">
+        <li>Нажмите «Скачать Loom Launcher» и сохраните файл <b>LoomLauncher.exe</b>.</li>
+        <li>Дважды щёлкните по файлу, чтобы запустить.</li>
+        <li><b>SmartScreen</b> (синее окно): нажмите <span class="kbd">More info</span> → <span class="kbd">Run anyway</span>.</li>
+        <li>Если <b>Windows Defender</b> поместил файл в карантин:
+          <ul>
+            <li>Откройте «Безопасность Windows» → «Защита от вирусов и угроз» → «Журнал защиты».</li>
+            <li>Найдите последний блок по LoomLauncher → «Восстановить» → «Разрешить на устройстве».</li>
+            <li>Рекомендуется добавить папку с лаунчером в исключения:
+              «Параметры защиты от вирусов и угроз» → «Исключения» → «Добавить исключение» → «Папка» → выберите папку с лаунчером (или <span class="kbd">C:\dev\game-platform\launcher\dist</span>).</li>
+          </ul>
+        </li>
+        <li>Для корректной загрузки списка игр рядом с .exe положите файл <span class="kbd">launcher_config.json</span>:
+<pre style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); padding:10px; border-radius:10px; overflow:auto;">{
+  "catalogUrl": "https://artemPGH.github.io/game-catalog/games.json",
+  "updateUrl":  "https://artemPGH.github.io/game-catalog/update.json"
+}</pre>
+        </li>
+        <li>Готово! Запускайте Loom Launcher и устанавливайте игры.</li>
+      </ol>
+
+      <h3>Обновления лаунчера</h3>
+      <p>Лаунчер сам проверяет <span class="kbd">update.json</span> и предложит обновиться, если доступна новая версия.
+      Нажмите «Обновить лаунчер» внутри приложения.</p>
+
+      <div class="actions">
+        <button id="close" class="btn secondary" type="button">Закрыть</button>
+      </div>
     </div>
-  </noscript>
+  </div>
 
-  <script>
-    // === НАСТРОЙКИ ===
-    // Поставь свою дату релиза и ссылку на скачивание:
-    const TARGET_ISO   = "2025-10-11T18:00:00+01:00"; // <-- ЗАМЕНИ на дату/время релиза (твой часовой пояс)
-    const DOWNLOAD_URL = "https://artemPGH.github.io/game-catalog/Launcher/LoomLauncher.exe";
-    // Пример для Releases: https://github.com/<USER>/<REPO>/releases/latest/download/LoomLauncher.exe
+<script>
+  // ============ НАСТРОЙКИ РЕЛИЗА ============
+  // 1) укажи дату релиза (пример: Москва UTC+3 — завтра в 18:00)
+  const TARGET_ISO   = "2025-10-11T18:00:00+01:00";
+  // 2) укажи ссылку на EXE
+  const DOWNLOAD_URL = "https://artemPGH.github.io/game-catalog/Launcher/LoomLauncher.exe";
 
-    // === ЛОГИКА ТАЙМЕРА ===
-    const target = new Date(TARGET_ISO);
-    const els = { d: document.getElementById('d'), h: document.getElementById('h'),
-                  m: document.getElementById('m'), s: document.getElementById('s'),
-                  dl: document.getElementById('dl') };
+  // ======== СЛУЖЕБКА ========
+  const target = new Date(TARGET_ISO);
+  const els = {
+    d: document.getElementById('d'),
+    h: document.getElementById('h'),
+    m: document.getElementById('m'),
+    s: document.getElementById('s'),
+    dl: document.getElementById('dl'),
+    mega: document.getElementById('mega'),
+    megaBtn: document.getElementById('megaBtn'),
+    fx: document.getElementById('fx'),
+    when: document.getElementById('when'),
+    yr: document.getElementById('yr'),
+    more: document.getElementById('more'),
+    modal: document.getElementById('modal'),
+    mbg: document.getElementById('mbg'),
+    close: document.getElementById('close'),
+    snd: document.getElementById('snd')
+  };
 
-    // Показать дату релиза и год в подвале
-    document.getElementById('yr').textContent = new Date().getFullYear();
-    document.getElementById('when').textContent = target.toLocaleString();
+  els.when.textContent = target.toLocaleString();
+  els.yr.textContent = new Date().getFullYear();
 
-    // Если релиз уже наступил – сразу открыть кнопку
-    function openDownload(){
-      els.dl.removeAttribute('disabled');
-      els.dl.href = DOWNLOAD_URL;
+  // ======== АУДИО (WebAudio), чтобы не блокировался автоплеем ========
+  let audioCtx, masterGain, seqTimer;
+  function setupAudio(){
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 0.0; // начнём с нуля, поднимем при старте эффекта
+    masterGain.connect(audioCtx.destination);
+  }
+  function playAmbient(){
+    setupAudio();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    // простой арпеджиатор
+    const notes = [220, 277, 330, 440, 554, 660, 880];
+    let i = 0;
+    masterGain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.2);
+    stopAmbient();
+    seqTimer = setInterval(()=>{
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.value = notes[i % notes.length] * (Math.random() < 0.25 ? 2 : 1);
+      g.gain.setValueAtTime(0.0, audioCtx.currentTime);
+      g.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.45);
+      osc.connect(g); g.connect(masterGain);
+      osc.start(); osc.stop(audioCtx.currentTime + 0.5);
+      i++;
+    }, 500);
+  }
+  function stopAmbient(){
+    if (seqTimer) clearInterval(seqTimer);
+    if (masterGain) masterGain.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.2);
+  }
+  els.snd.addEventListener('click', ()=>{
+    if (!audioCtx || audioCtx.state !== 'running'){
+      playAmbient();
+      els.snd.textContent = "🔇 Выключить звук";
+    } else {
+      stopAmbient();
+      els.snd.textContent = "🔊 Включить звук";
     }
+  });
 
-    function tick(){
-      const now = new Date();
-      const diff = target - now;
-      if (diff <= 0){
-        openDownload();
-        els.d.textContent = 0; els.h.textContent = 0; els.m.textContent = 0; els.s.textContent = 0;
-        clearInterval(tmr);
-        return;
+  // ======== ФЕЙЕРВЕРКИ (canvas) ========
+  const ctx = els.fx.getContext('2d');
+  function resizeFX(){
+    els.fx.width = window.innerWidth;
+    els.fx.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeFX); resizeFX();
+
+  const particles = [];
+  function firework(x, y, color){
+    const n = 60 + Math.floor(Math.random()*30);
+    for (let i=0;i<n;i++){
+      const angle = Math.random()*Math.PI*2;
+      const speed = 2 + Math.random()*4;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed - 1,
+        life: 60 + Math.random()*30,
+        color
+      });
+    }
+  }
+  let fxAnim, fxEndTime = 0;
+  function startFireworks(durationMs=5000){
+    els.fx.style.display = 'block';
+    fxEndTime = performance.now() + durationMs;
+    if (audioCtx) masterGain.gain.linearRampToValueAtTime(0.09, audioCtx.currentTime + 0.2);
+
+    (function loop(){
+      const now = performance.now();
+      ctx.clearRect(0,0,els.fx.width, els.fx.height);
+      // случайные залпы
+      if (Math.random() < 0.08){
+        const x = 80 + Math.random()*(els.fx.width-160);
+        const y = 80 + Math.random()*(els.fx.height*0.5);
+        const palette = ['#ff7a3d','#ffd39f','#ff4d4d','#3ddc97','#6aa9ff','#ffe66d'];
+        firework(x,y, palette[Math.floor(Math.random()*palette.length)]);
       }
-      const sec = Math.floor(diff/1000) % 60;
-      const min = Math.floor(diff/1000/60) % 60;
-      const hr  = Math.floor(diff/1000/60/60) % 24;
-      const day = Math.floor(diff/1000/60/60/24);
-      els.d.textContent = day;
-      els.h.textContent = hr.toString().padStart(2,'0');
-      els.m.textContent = min.toString().padStart(2,'0');
-      els.s.textContent = sec.toString().padStart(2,'0');
-    }
+      // частицы
+      for (let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.03; // гравитация
+        p.life -= 1;
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+        ctx.fill();
+        if (p.life <= 0) particles.splice(i,1);
+      }
+      if (now < fxEndTime){
+        fxAnim = requestAnimationFrame(loop);
+      } else {
+        cancelAnimationFrame(fxAnim);
+        els.fx.style.display = 'none';
+        if (audioCtx) masterGain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.2);
+      }
+    })();
+  }
 
-    // Если вдруг кто-то повторно откроет после релиза — кнопка сразу активна
-    if (Date.now() >= target.getTime()) openDownload();
-    const tmr = setInterval(tick, 1000); tick();
-  </script>
+  // ======== ТАЙМЕР ========
+  function openDownload(){
+    els.dl.removeAttribute('disabled');
+    els.dl.href = DOWNLOAD_URL;
+    els.megaBtn.href = DOWNLOAD_URL;
+  }
+  function showMega(){
+    els.mega.style.display = 'flex';
+    setTimeout(()=>{ els.mega.style.display='none'; }, 5000);
+  }
+  function tick(){
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0){
+      // релиз наступил
+      clearInterval(tmr);
+      openDownload();
+      startFireworks(5000);
+      playAmbient(); // попробуем запустить; если браузер заблокирует — будет ждать клика по звуку
+      showMega();
+      els.d.textContent = 0; els.h.textContent = "00"; els.m.textContent = "00"; els.s.textContent = "00";
+      return;
+    }
+    const sec = Math.floor(diff/1000) % 60;
+    const min = Math.floor(diff/1000/60) % 60;
+    const hr  = Math.floor(diff/1000/60/60) % 24;
+    const day = Math.floor(diff/1000/60/60/24);
+    els.d.textContent = day;
+    els.h.textContent = String(hr).padStart(2,'0');
+    els.m.textContent = String(min).padStart(2,'0');
+    els.s.textContent = String(sec).padStart(2,'0');
+  }
+  if (Date.now() >= target.getTime()) { openDownload(); } // если уже прошли время — сразу открыть
+  const tmr = setInterval(tick, 1000); tick();
+
+  // ======== МОДАЛКА ========
+  function openModal(){ els.mbg.style.display='block'; els.modal.style.display='grid'; }
+  function closeModal(){ els.modal.style.display='none'; els.mbg.style.display='none'; }
+  els.more.addEventListener('click', openModal);
+  els.close.addEventListener('click', closeModal);
+  els.mbg.addEventListener('click', closeModal);
+
+  // Клик по гигантской кнопке тоже скрывает слой
+  document.getElementById('megaBtn').addEventListener('click', ()=>{ els.mega.style.display='none'; });
+</script>
 </body>
 </html>
