@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0.0-LL-0-2",
+  "version": "1.0.0.0-LL-0-3",
   "url": "https://artemPGH.github.io/game-catalog/Launcher/LoomLauncher.exe",
-  "sha256": "C6A9A4104A88B72F04242BC28E1C640E6D72538F27310DE52FD83D60A3BF3068",
-  "changelog": "RELEASED-BUG-FIXED-ADDED-COLOR-TO-MAIN"
+  "sha256": "9491ADF9AAFA097FAC5612CD3E9DC5AE72CAAE54D3ECDBCBFF5D5A59F11AA084",
+  "changelog": "RELEASED"
 }
