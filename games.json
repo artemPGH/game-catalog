@@ -23,5 +23,21 @@
     "icon": "https://artemPGH.github.io/game-catalog/icons/roblox.png",
     "cover": "https://artemPGH.github.io/game-catalog/covers/roblox.png",
     "description": "Популярная онлайн-платформа для игр и творчества."
+  },
+  {
+    "id": "loom_person",
+    "name": "Loom Person",
+    "tags": ["platformer", "2D", "adventure"],
+    "version": "1.0.0",
+    "download": {
+      "url": "https://artemPGH.github.io/game-catalog/loom_person_win.zip",
+      "sha256": "81852C039259B38789982F59A7884E4721D8EB2D48C63FDE814286FB960E2975"
+    },
+    "exec": {
+      "win": "LoomPerson/LoomPerson.exe"
+    },
+    "icon": "https://artemPGH.github.io/game-catalog/icons/loom_person.png",
+    "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png",
+    "description": "2D-платформер с несколькими уровнями, весёлой музыкой и магазином скинов."
   }
 ]
