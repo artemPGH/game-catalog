@@ -1,41 +1,53 @@
 [
-  {
-    "id": "my_demo_game",
-    "name": "My Demo Game",
-    "tags": ["indie", "singleplayer"],
-    "version": "1.0.1",
-    "download": {
-      "url": "https://artemPGH.github.io/game-catalog/my_demo_win.zip",
-      "sha256": "c36f194c67456daca8476f7084a350bd5c9bcabf3f6b8f0b1435d742df0c329b"
+    {
+        "id": "my_demo_game",
+        "name": "My Demo Game",
+        "tags": [
+            "indie",
+            "singleplayer"
+        ],
+        "version": "1.0.1",
+        "download": {
+            "url": "https://artemPGH.github.io/game-catalog/my_demo_win.zip",
+            "sha256": "c36f194c67456daca8476f7084a350bd5c9bcabf3f6b8f0b1435d742df0c329b"
+        },
+        "exec": {
+            "win": "MyDemoGame/MyDemoGame.exe"
+        },
+        "icon": "https://artemPGH.github.io/game-catalog/icons/my_demo_game.png",
+        "cover": "https://artemPGH.github.io/game-catalog/covers/my_demo_game.png",
+        "description": "Небольшая демо-игра. Нажми кнопку — и увидишь приветствие!"
     },
-    "exec": {
-      "win": "MyDemoGame/MyDemoGame.exe"
+    {
+        "id": "roblox",
+        "name": "Roblox",
+        "tags": [
+            "sandbox",
+            "online"
+        ],
+        "url": "https://www.roblox.com/",
+        "icon": "https://artemPGH.github.io/game-catalog/icons/roblox.png",
+        "cover": "https://artemPGH.github.io/game-catalog/covers/roblox.png",
+        "description": "Популярная онлайн-платформа для игр и творчества."
     },
-    "icon": "https://artemPGH.github.io/game-catalog/icons/my_demo_game.png",
-    "cover": "https://artemPGH.github.io/game-catalog/covers/my_demo_game.png",
-    "description": "Небольшая демо-игра. Нажми кнопку — и увидишь приветствие!"
-  },
-  {
-    "id": "roblox",
-    "name": "Roblox",
-    "tags": ["sandbox", "online"],
-    "url": "https://www.roblox.com/",
-    "icon": "https://artemPGH.github.io/game-catalog/icons/roblox.png",
-    "cover": "https://artemPGH.github.io/game-catalog/covers/roblox.png",
-    "description": "Популярная онлайн-платформа для игр и творчества."
-  },
-{
-  "id": "loom_person",
-  "name": "Loom Person",
-  "tags": ["platformer", "2D", "adventure"],
-  "version": "1.1.0",
-  "download": {
-    "url": "https://artemPGH.github.io/game-catalog/loom_person_win.zip",
-    "sha256": "6674391396D07B42471D8D5E8A36F74E3720184DA401E89C99808B72A7DFD3D9"
-  },
-  "exec": { "win": "LoomPerson/LoomPerson.exe" },
-  "icon": "https://artemPGH.github.io/game-catalog/icons/loom_person.png",
-  "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png",
-  "description": "Loom Person v1.1 — новая музыка, лидерборд, награды и новый уровень."
-}
-
+    {
+        "id": "loom_person",
+        "name": "Loom Person",
+        "tags": [
+            "platformer",
+            "2D",
+            "adventure"
+        ],
+        "version": "1.1.0",
+        "download": {
+            "url": "https://artemPGH.github.io/game-catalog/loom_person_win.zip",
+            "sha256": "6674391396D07B42471D8D5E8A36F74E3720184DA401E89C99808B72A7DFD3D9"
+        },
+        "exec": {
+            "win": "LoomPerson/LoomPerson.exe"
+        },
+        "icon": "https://artemPGH.github.io/game-catalog/icons/loom_person.png",
+        "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png",
+        "description": "Loom Person v1.1 — новая музыка, лидерборд, награды и новый уровень."
+    }
+]
