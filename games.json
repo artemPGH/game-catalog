@@ -14,8 +14,8 @@
         "exec": {
             "win": "MyDemoGame/MyDemoGame.exe"
         },
-        "icon": "https://artemPGH.github.io/game-catalog/icons/my_demo_game.png",
-        "cover": "https://artemPGH.github.io/game-catalog/covers/my_demo_game.png",
+        "icon":  "https://artemPGH.github.io/game-catalog/icons/my_demo_game.png?v=20251011",
+        "cover": "https://artemPGH.github.io/game-catalog/covers/my_demo_game.png?v=20251011",
         "description": "Небольшая демо-игра. Нажми кнопку — и увидишь приветствие!"
     },
     {
