@@ -15,7 +15,7 @@
     "exec": {
         "win": "LoomPerson.exe"
     },
-    "icon": "https://artemPGH.github.io/game-catalog/icons/loom_person.png",
-    "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png",
+    "icon":  "https://artemPGH.github.io/game-catalog/icons/loom_person.png?v=20251011",
+    "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png?v=20251011",
     "description": "Loom Person v1.1 — новая музыка, лидерборд, награды и новый уровень."
 }
