@@ -1,21 +1,16 @@
-{
+[
+  {
     "id": "loom_person",
     "name": "Loom Person",
-    "tags": [
-        "platformer",
-        "2D",
-        "adventure"
-    ],
+    "tags": ["platformer", "2D", "adventure"],
     "version": "1.1.0",
     "download": {
-        "url": "https://artemPGH.github.io/game-catalog/loom_person_win.zip",
-        "sha256": "6674391396D07B42471D8D5E8A36F74E3720184DA401E89C99808B72A7DFD3D9",
-        "size": 15225521
+      "url": "https://artemPGH.github.io/game-catalog/loom_person_win.zip",
+      "sha256": "6674391396d07b42471d8d5e8a36f74e3720184da401e89c99808b72a7dfd3d9"
     },
-    "exec": {
-        "win": "LoomPerson.exe"
-    },
+    "exec": { "win": "LoomPerson.exe" },
     "icon":  "https://artemPGH.github.io/game-catalog/icons/loom_person.png?v=20251011",
     "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png?v=20251011",
     "description": "Loom Person v1.1 — новая музыка, лидерборд, награды и новый уровень."
-}
+  }
+]
