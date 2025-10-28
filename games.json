@@ -6,7 +6,7 @@
     "version": "1.1.0",
     "download": {
       "url": "https://artemPGH.github.io/game-catalog/games/loom_person_win.zip",
-      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b0818da61a6"
+      "sha256": "7eb70257593da06f682a3ddda5a89d260d4fc514f64523f5ca74b0618d6a61a6"
     },
     "exec": { "win": "LoomPerson.exe" },
     "icon":  "https://artemPGH.github.io/game-catalog/icons/loom_person.png?v=20251011",
