@@ -20,7 +20,7 @@
   "version": "1.0.0.0",
   "download": {
     "url": "https://artemPGH.github.io/game-catalog/pumpkin_run_win.zip",
-    "sha256": "4192b88865a40f433f92f5bf4de7ede2e78d52f83541d86c693e9c2d55188e6d8"
+    "sha256": "4192B88865A40F433F92F5BF4DE7EDE2E78D52F83541D86C693E9C2D5188E6D8"
   },
   "exec": { "win": "PumpkinRun.exe" },
   "icon": "https://artemPGH.github.io/game-catalog/icons/pumpkin_run.png?v=20241028",
