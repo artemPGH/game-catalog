@@ -19,7 +19,7 @@
   "tags": ["horror", "3D", "survival"],
   "version": "1.0.0.0",
   "download": {
-    "url": "https://artemPGH.github.io/game-catalog/pumpkin_run_win.zip",
+    "url": "https://artemPGH.github.io/game-catalog/games/Pumpkin_Run.exe",
     "sha256": "4192b88865a40f433f92f5bf4de7ede2e78d52f83541d86c693e9c2d55188e6d8"
   },
   "exec": { "win": "PumpkinRun.exe" },
