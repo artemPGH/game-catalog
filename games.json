@@ -5,7 +5,7 @@
     "tags": ["platformer", "2D", "adventure"],
     "version": "1.1.0",
     "download": {
-      "url": "https://artemPGH.github.io/game-catalog/games/loom_person_win.zip",
+      "url": "https://artemPGH.github.io/game-catalog/loom_person_win.zip",
       "sha256": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6"
     },
     "exec": { "win": "LoomPerson.exe" },
@@ -19,7 +19,7 @@
   "tags": ["horror", "3D", "survival"],
   "version": "1.0.0.0",
   "download": {
-    "url": "https://artemPGH.github.io/game-catalog/games/pumpkin_run_win",
+    "url": "https://artemPGH.github.io/game-catalog/pumpkin_run_win",
     "sha256": "4192b88865a40f433f92f5bf4de7ede2e78d52f83541d86c693e9c2d55188e6d8"
   },
   "exec": { "win": "PumpkinRun.exe" },
