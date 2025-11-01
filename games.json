@@ -3,15 +3,15 @@
     "id": "loom_person",
     "name": "Loom Person",
     "tags": ["platformer", "2D", "adventure"],
-    "version": "1.1.0",
+    "version": "1.0.0.3",
     "download": {
-      "url": "https://artemPGH.github.io/game-catalog/loom_person_win.zip",
-      "sha256": "1443292BED00E2DF9BD09ACBD0A12A262594AB0D2FE933D66A368E934EB6E2CF"
+      "url": "https://artemPGH.github.io/game-catalog/LoomPerson_v1.0.0.3.zip",
+      "sha256": "75EFD86041E3AA32D85C5F21A77A9A66B68E8ECC3B7E84297EABD696D72D7492"
     },
-    "exec": { "win": "loom_person_v1_1.exe" },
+    "exec": { "win": "LoomPerson.exe" },
     "icon":  "https://artemPGH.github.io/game-catalog/icons/loom_person.png?v=20251011",
     "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png?v=20251011",
-    "description": "Loom Person v1.1 — новая музыка, лидерборд, награды и новый уровень."
+    "description": "LoomPerson 1.0.0.3 ДОБАВЛЕНО: +5 уровней +6 скинов ФУНКЦИИ: просматривание скинов в магазине ИСПРАВЛЕНИЯ:багов исправлено 2"
   },
   {
   "id": "pumpkin_run_halloween",
