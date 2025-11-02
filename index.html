@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Loom Launcher — релиз</title>
-<meta name="description" content="Релиз Loom Launcher. Таймер, салюты, локальный счётчик скачиваний, музыка и инструкция." />
+<title>Loom Launcher — игровой лаунчер</title>
+<meta name="description" content="Loom Launcher — уютный игровой лаунчер с поддержкой автообновления, установкой игр одним кликом и приятным дизайном." />
 <meta name="theme-color" content="#ff7a3d" />
 <style>
   :root{
@@ -97,21 +97,26 @@
   .foot{display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--muted); font-size:12px}
   code{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:4px 6px; border-radius:8px}
 
-  /* кнопка-гигант при релизе */
-  .mega { position: fixed; inset:0; display:none; z-index:3;
-    background: radial-gradient(1200px 800px at 50% -20%, rgba(255,143,92,.25), transparent 55%);
-    align-items:center; justify-content:center; }
-  .mega .btn {
-    transform: scale(1.0);
-    font-size: clamp(22px, 3vw, 36px);
-    padding: 18px 28px; border-radius: 16px;
-    box-shadow: 0 18px 50px rgba(255,122,61,.6);
-    animation: bounce 0.9s ease-in-out infinite;
-  }
-  @keyframes bounce { 0%,100% { transform: translateY(0) scale(1.0); } 50% { transform: translateY(-8px) scale(1.04); } }
-
-  /* холст фейерверков */
-  #fx { position: fixed; inset:0; z-index:2; pointer-events:none; display:none; }
+  /* фичи */
+  .features{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin-top:18px}
+  .feature{background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:12px; padding:16px; transition:background .2s ease}
+  .feature:hover{background:rgba(255,255,255,.06)}
+  .feature-icon{font-size:28px; margin-bottom:8px}
+  .feature h3{margin:0 0 6px 0; font-size:16px}
+  .feature p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
+  
+  /* скачивание блок */
+  .download-box{background:linear-gradient(135deg, rgba(255,122,61,.08), rgba(61,220,151,.08)); border:1px solid rgba(255,122,61,.3); border-radius:14px; padding:20px; margin-top:20px}
+  .download-box h3{margin:0 0 8px 0; font-size:20px}
+  .download-box .version{color:var(--muted); font-size:13px; margin-bottom:14px}
+  .download-box .dl-info{display:flex; gap:18px; flex-wrap:wrap; align-items:center; margin-top:14px}
+  .download-box .dl-info span{color:var(--muted); font-size:12px}
+  
+  /* анимации */
+  @keyframes fadeIn{from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)}}
+  .card{animation:fadeIn 0.6s ease-out}
+  @keyframes float{0%,100%{transform:translateY(0px)} 50%{transform:translateY(-10px)}}
+  .logo{animation:float 3s ease-in-out infinite}
 
   /* модалка */
   .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; z-index:4; }
@@ -126,10 +131,7 @@
   .modal .actions{display:flex; justify-content:flex-end; gap:10px; margin-top:14px}
   .kbd{padding:2px 6px; border-radius:6px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
 
-  /* панель музыки/даты */
-  .infobar{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:12px; color:var(--muted); font-size:13px}
-  .infobar button{padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background:transparent; color:#fff; cursor:pointer}
-  .infobar button:hover{background:rgba(255,255,255,.06)}
+
 </style>
 </head>
 <body>
@@ -152,51 +154,86 @@
           </svg>
         </div>
         <div>
-          <h1>Loom Launcher — релиз</h1>
-          <p class="sub">Тёплый, уютный игровой лаунчер. Кнопка «Скачать» появится ровно в момент релиза.</p>
+          <h1>Loom Launcher</h1>
+          <p class="sub">Тёплый, уютный игровой лаунчер с поддержкой автообновления и простым управлением играми</p>
         </div>
       </div>
 
-      <div class="row">
-        <section class="col block">
-          <div class="label">До релиза осталось</div>
-          <div class="timer" id="timer">
-            <div class="tbox"><div class="num" id="d">0</div><div class="cap">дней</div></div>
-            <div class="tbox"><div class="num" id="h">00</div><div class="cap">часов</div></div>
-            <div class="tbox"><div class="num" id="m">00</div><div class="cap">минут</div></div>
-            <div class="tbox"><div class="num" id="s">00</div><div class="cap">секунд</div></div>
-          </div>
+      <!-- Скачивание -->
+      <div class="download-box">
+        <h3>⬇️ Скачать Loom Launcher</h3>
+        <div class="version">Версия 1.0.0-LL-5-1 • Размер: ~2.5 МБ • Windows 10/11</div>
+        <div class="btns">
+          <a id="dl" class="btn" href="https://artemPGH.github.io/game-catalog/Launcher/LoomLauncher.exe" download>Скачать LoomLauncher.exe</a>
+          <button id="more" class="btn secondary" type="button">📖 Инструкция по установке</button>
+        </div>
+        <div class="dl-info">
+          <span>✅ Безопасно</span>
+          <span>🔄 Автообновление</span>
+          <span>💾 Скачиваний: <b id="dlCount">0</b></span>
+        </div>
+      </div>
 
-          <div class="kpi"><span class="dot"></span> Скачиваний: <b id="dlCount">0 (локально)</b></div>
-
-          <div class="btns">
-            <a id="dl" class="btn" href="#" download disabled>⬇️ Скачать Loom Launcher</a>
-            <button id="more" class="btn secondary" type="button">Подробнее</button>
-          </div>
-
-          <div class="infobar">
-            <button id="snd" type="button">🔊 Включить музыку</button>
-            <span id="when" class="muted"></span>
-          </div>
-
-          <div class="hint">Кнопка станет активной в момент выхода. Время берётся из вашей временной зоны.</div>
-        </section>
-
+      <!-- О лаунчере -->
+      <div class="row" style="margin-top:28px">
         <section class="col block">
           <div class="label">О Loom Launcher</div>
           <p style="margin:10px 0 0; line-height:1.7;">
-            Loom Launcher — это независимый лаунчер с доброй атмосферой. Мы не гонимся за монетизацией:
+            Loom Launcher — это независимый игровой лаунчер с доброй атмосферой. Мы не гонимся за монетизацией:
             наша цель — <b>уют</b>, простота и уважение к игроку и инди-разработчикам. Лаунчер лёгкий, понятный,
             поддерживает темы и сам себя обновляет.
           </p>
-          <ul style="margin:10px 0 0 18px; line-height:1.7;">
-            <li>Установка и обновление игр одним кликом</li>
-            <li>Контроль целостности файлов (SHA-256)</li>
-            <li>Самообновление лаунчера через GitHub Pages</li>
-            <li>Темы, акцентные цвета и «уютная» эстетика</li>
+        </section>
+        <section class="col block">
+          <div class="label">Системные требования</div>
+          <ul style="margin:10px 0 0 18px; line-height:1.7; color:var(--muted)">
+            <li><b style="color:#fff">ОС:</b> Windows 10 или Windows 11</li>
+            <li><b style="color:#fff">Процессор:</b> любой современный CPU</li>
+            <li><b style="color:#fff">RAM:</b> 512 МБ свободной памяти</li>
+            <li><b style="color:#fff">Место:</b> ~50 МБ + игры</li>
+            <li><b style="color:#fff">Интернет:</b> для скачивания игр и обновлений</li>
           </ul>
         </section>
       </div>
+
+      <!-- Возможности -->
+      <div class="block" style="margin-top:24px">
+        <div class="label">Возможности лаунчера</div>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">🎮</div>
+            <h3>Установка игр одним кликом</h3>
+            <p>Просматривайте каталог игр и устанавливайте их мгновенно без лишних действий</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🔄</div>
+            <h3>Автоматическое обновление</h3>
+            <p>Лаунчер сам проверяет наличие новых версий и предлагает обновиться</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <h3>Проверка целостности</h3>
+            <p>Контроль файлов через SHA-256 хеши для безопасности</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🎨</div>
+            <h3>Темы оформления</h3>
+            <p>Выбирайте между светлой и тёмной темой, настраивайте акцентные цвета</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Управление играми</h3>
+            <p>Устанавливайте, обновляйте и удаляйте игры через удобный интерфейс</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">💾</div>
+            <h3>Облачные сохранения</h3>
+            <p>Синхронизация настроек профилей и списка игр через облако</p>
+          </div>
+        </div>
+      </div>
+
+
 
       <div class="sep"></div>
       <footer class="foot">
@@ -206,10 +243,7 @@
     </section>
   </main>
 
-  <!-- холст фейерверков -->
-  <canvas id="fx"></canvas>
-  <!-- гигантская кнопка -->
-  <div class="mega" id="mega"><a id="megaBtn" class="btn" href="#" download>⬇️ Скачать Loom Launcher</a></div>
+
 
   <!-- Модалка «Подробнее» -->
   <div class="modal-backdrop" id="mbg"></div>
@@ -250,159 +284,24 @@
   </div>
 
 <script>
-  // ======== ТВОИ КОНСТАНТЫ (уже проставлены) ========
-  const TARGET_ISO   = "2025-10-11T17:00:00+01:00";
-  const DOWNLOAD_URL = "https://artemPGH.github.io/game-catalog/Launcher/LoomLauncher.exe";
-
   // ======== ЭЛЕМЕНТЫ ========
-  const target = new Date(TARGET_ISO);
   const els = {
-    d: document.getElementById('d'),
-    h: document.getElementById('h'),
-    m: document.getElementById('m'),
-    s: document.getElementById('s'),
     dl: document.getElementById('dl'),
     dlCount: document.getElementById('dlCount'),
-    mega: document.getElementById('mega'),
-    megaBtn: document.getElementById('megaBtn'),
-    fx: document.getElementById('fx'),
-    when: document.getElementById('when'),
     yr: document.getElementById('yr'),
     more: document.getElementById('more'),
     modal: document.getElementById('modal'),
     mbg: document.getElementById('mbg'),
-    close: document.getElementById('close'),
-    snd: document.getElementById('snd')
+    close: document.getElementById('close')
   };
-  els.when.textContent = "Релиз: " + target.toLocaleString();
   els.yr.textContent = new Date().getFullYear();
 
-  // ======== МУЗЫКА (WebAudio) — тихий луп, по кнопке, с запоминанием ========
-  let audioCtx, masterGain, seqTimer;
-  function setupAudio(){
-    if (audioCtx) return;
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    masterGain = audioCtx.createGain();
-    masterGain.gain.value = 0.0; masterGain.connect(audioCtx.destination);
-  }
-  function playAmbient(){
-    setupAudio();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const notes = [196, 247, 294, 392, 494, 587, 784]; // спокойные интервалы
-    let i = 0;
-    masterGain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 0.2);
-    stopAmbient();
-    seqTimer = setInterval(()=>{
-      const osc = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = notes[i % notes.length] * (Math.random() < 0.2 ? 2 : 1);
-      g.gain.setValueAtTime(0.0, audioCtx.currentTime);
-      g.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.08);
-      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.9);
-      osc.connect(g); g.connect(masterGain);
-      osc.start(); osc.stop(audioCtx.currentTime + 1.0);
-      i++;
-    }, 1000);
-    localStorage.setItem("loom_sound", "on");
-    els.snd.textContent = "🔇 Выключить музыку";
-  }
-  function stopAmbient(){
-    if (seqTimer) clearInterval(seqTimer);
-    if (masterGain) masterGain.gain.linearRampToValueAtTime(0.0, (audioCtx?.currentTime || 0) + 0.2);
-    localStorage.setItem("loom_sound", "off");
-    els.snd.textContent = "🔊 Включить музыку";
-  }
-  els.snd.addEventListener('click', ()=>{
-    if (!audioCtx || audioCtx.state !== 'running' || localStorage.getItem("loom_sound") !== "on"){
-      playAmbient();
-    } else {
-      stopAmbient();
-    }
-  });
-  // автозапуск если пользователь разрешал ранее — включим при первом клике по странице
-  if (localStorage.getItem("loom_sound") === "on"){
-    window.addEventListener('pointerdown', function once(){
-      playAmbient(); window.removeEventListener('pointerdown', once, {capture:true});
-    }, {capture:true, once:true});
-  }
 
-  // ======== ФЕЙЕРВЕРКИ (canvas) ========
-  const ctx = els.fx.getContext('2d');
-  function resizeFX(){ els.fx.width = window.innerWidth; els.fx.height = window.innerHeight; }
-  window.addEventListener('resize', resizeFX); resizeFX();
-  const particles = [];
-  function firework(x, y, color){
-    const n = 60 + Math.floor(Math.random()*30);
-    for (let i=0;i<n;i++){
-      const angle = Math.random()*Math.PI*2;
-      const speed = 2 + Math.random()*4;
-      particles.push({ x, y, vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed - 1, life: 60 + Math.random()*30, color });
-    }
-  }
-  let fxAnim, fxEndTime = 0;
-  function startFireworks(durationMs=5000){
-    els.fx.style.display = 'block';
-    fxEndTime = performance.now() + durationMs;
-    if (audioCtx) masterGain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 0.2);
-    (function loop(){
-      const now = performance.now();
-      ctx.clearRect(0,0,els.fx.width, els.fx.height);
-      if (Math.random() < 0.08){
-        const x = 80 + Math.random()*(els.fx.width-160);
-        const y = 80 + Math.random()*(els.fx.height*0.5);
-        const palette = ['#ff7a3d','#ffd39f','#ff4d4d','#3ddc97','#6aa9ff','#ffe66d'];
-        firework(x,y, palette[Math.floor(Math.random()*palette.length)]);
-      }
-      for (let i=particles.length-1;i>=0;i--){
-        const p = particles[i];
-        p.x += p.vx; p.y += p.vy; p.vy += 0.03; p.life -= 1;
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.fillStyle = p.color;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
-        if (p.life <= 0) particles.splice(i,1);
-      }
-      if (now < fxEndTime){ fxAnim = requestAnimationFrame(loop); }
-      else { cancelAnimationFrame(fxAnim); els.fx.style.display = 'none';
-             if (audioCtx) masterGain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 0.2); }
-    })();
-  }
-
-  // ======== ТАЙМЕР ========
-  function openDownload(){
-    els.dl.removeAttribute('disabled');
-    els.dl.href = DOWNLOAD_URL;
-    els.megaBtn.href = DOWNLOAD_URL;
-  }
-  function showMega(){ els.mega.style.display = 'flex'; setTimeout(()=>{ els.mega.style.display='none'; }, 5000); }
-  function tick(){
-    const now = new Date();
-    const diff = target - now;
-    if (diff <= 0){
-      clearInterval(tmr);
-      openDownload();
-      startFireworks(5000);
-      if (localStorage.getItem("loom_sound") === "on") playAmbient();
-      showMega();
-      els.d.textContent = 0; els.h.textContent = "00"; els.m.textContent = "00"; els.s.textContent = "00";
-      return;
-    }
-    const sec = Math.floor(diff/1000) % 60;
-    const min = Math.floor(diff/1000/60) % 60;
-    const hr  = Math.floor(diff/1000/60/60) % 24;
-    const day = Math.floor(diff/1000/60/60/24);
-    els.d.textContent = day;
-    els.h.textContent = String(hr).padStart(2,'0');
-    els.m.textContent = String(min).padStart(2,'0');
-    els.s.textContent = String(sec).padStart(2,'0');
-  }
-  if (Date.now() >= target.getTime()) { openDownload(); }
-  const tmr = setInterval(tick, 1000); tick();
 
   // ======== ЛОКАЛЬНЫЙ СЧЁТЧИК СКАЧИВАНИЙ ========
   function loadLocalCount(){
     const n = Number(localStorage.getItem('loom_dl_local')||"0");
-    els.dlCount.textContent = n.toLocaleString('ru-RU') + " (локально)";
+    els.dlCount.textContent = n.toLocaleString('ru-RU');
   }
   function bumpLocalCounter(){
     const cur = Number(localStorage.getItem('loom_dl_local')||"0")+1;
@@ -411,11 +310,18 @@
   }
   loadLocalCount();
   els.dl.addEventListener('click', bumpLocalCounter);
-  els.megaBtn.addEventListener('click', bumpLocalCounter);
 
   // ======== МОДАЛКА ========
-  function openModal(){ els.mbg.style.display='block'; els.modal.style.display='grid'; }
-  function closeModal(){ els.modal.style.display='none'; els.mbg.style.display='none'; }
+  function openModal(){ 
+    els.mbg.style.display='block'; 
+    els.modal.style.display='grid'; 
+  }
+  function closeModal(){ 
+    els.modal.style.display='none'; 
+    els.mbg.style.display='none'; 
+  }
+  
+  // Обработчики событий для модального окна
   els.more.addEventListener('click', openModal);
   els.close.addEventListener('click', closeModal);
   els.mbg.addEventListener('click', closeModal);
