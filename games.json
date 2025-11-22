@@ -1,30 +1,44 @@
-[
-  {
-    "id": "loom_person",
-    "name": "Loom Person",
-    "tags": ["platformer", "2D", "adventure"],
-    "version": "1.0.0.3",
-    "download": {
-      "url": "https://artemPGH.github.io/game-catalog/LoomPerson_v1.0.0.3.zip",
-      "sha256": "75EFD86041E3AA32D85C5F21A77A9A66B68E8ECC3B7E84297EABD696D72D7492"
-    },
-    "exec": { "win": "LoomPerson.exe" },
-    "icon":  "https://artemPGH.github.io/game-catalog/icons/loom_person.png?v=20251011",
-    "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png?v=20251011",
-    "description": "LoomPerson 1.0.0.3 ДОБАВЛЕНО: +5 уровней +6 скинов ФУНКЦИИ: просматривание скинов в магазине ИСПРАВЛЕНИЯ:багов исправлено 2"
-  },
-  {
-  "id": "pumpkin_run_halloween",
-  "name": "Pumpkin Run",
-  "tags": ["horror", "3D", "survival"],
-  "version": "1.0.0.0",
-  "download": {
-    "url": "https://artemPGH.github.io/game-catalog/pumpkin_run_win.zip",
-    "sha256": "4192B88865A40F433F92F5BF4DE7EDE2E78D52F83541D86C693E9C2D5188E6D8"
-  },
-  "exec": { "win": "PumpkinRun.exe" },
-  "icon": "https://artemPGH.github.io/game-catalog/icons/pumpkin_run.png?v=20241028",
-  "cover": "https://artemPGH.github.io/game-catalog/covers/pumpkin_run.png?v=20241028",
-  "description": "Pumpkin Run v1.0 — 3D хоррор-игра в стиле Doors. Собери 8 конфет, избегай монстров."
-}
-]
+ [
+   {
+     "id": "loom_person",
+     "name": "Loom Person",
+     "tags": ["platformer", "2D", "adventure"],
+     "version": "1.0.0.3",
+     "download": {
+       "url": "https://artemPGH.github.io/game-catalog/LoomPerson_v1.0.0.3.zip",
+       "sha256": "75EFD86041E3AA32D85C5F21A77A9A66B68E8ECC3B7E84297EABD696D72D7492"
+     },
+     "exec": { "win": "LoomPerson.exe" },
+     "icon":  "https://artemPGH.github.io/game-catalog/icons/loom_person.png?v=20251011",
+     "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png?v=20251011",
+     "description": "LoomPerson 1.0.0.3 ДОБАВЛЕНО: +5 уровней +6 скинов ФУНКЦИИ: просматривание скинов в магазине ИСПРАВЛЕНИЯ:багов исправлено 2"
+   },
+   {
+     "id": "pumpkin_run_halloween",
+     "name": "Pumpkin Run",
+     "tags": ["horror", "3D", "survival"],
+     "version": "1.0.0.0",
+     "download": {
+       "url": "https://artemPGH.github.io/game-catalog/pumpkin_run_win.zip",
+       "sha256": "4192B88865A40F433F92F5BF4DE7EDE2E78D52F83541D86C693E9C2D5188E6D8"
+     },
+     "exec": { "win": "PumpkinRun.exe" },
+     "icon": "https://artemPGH.github.io/game-catalog/icons/pumpkin_run.png?v=20241028",
+     "cover": "https://artemPGH.github.io/game-catalog/covers/pumpkin_run.png?v=20241028",
+     "description": "Pumpkin Run v1.0 — 3D хоррор-игра в стиле Doors. Собери 8 конфет, избегай монстров."
+   },
+   {
+     "id": "loom_city",
+     "name": "Loom City",
+     "tags": ["city-builder", "2D", "simulation"],
+     "version": "1.0.0.0",
+     "download": {
+       "url": "https://artemPGH.github.io/game-catalog/LoomCity_v1.0.0.3.zip",
+       "sha256": "04F9B0AA06646A924E65F5EBC108F64F25B9121A0B310F9A6E754F0C99FF2A761"
+     },
+     "exec": { "win": "LoomCity.exe" },
+     "icon": "https://artemPGH.github.io/game-catalog/icons/loom_city.png?v=20251122",
+     "cover": "https://artemPGH.github.io/game-catalog/covers/loom_city.png?v=20251122",
+     "description": "LoomCity 1.0.0.0 ДОБАВЛЕНО: +Система сохранения +Режим песочницы с бесконечными деньгами +Улучшенное меню с возможностью выбора мышью +Визуальные улучшения зданий при апгрейде +Улучшенное управление временем и скоростью игры ФУНКЦИИ: Постройка городов с различными типами зданий, Управление ресурсами (электричество, вода, бюджет), Система уровней для зданий, Статистика города (население, счастье, преступность и т.д.) ИСПРАВЛЕНИЯ: Исправлены баги с позиционированием мыши, Улучшена стабильность игры, Исправлены проблемы с меню"
+   }
+ ]
