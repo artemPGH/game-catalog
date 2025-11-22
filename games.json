@@ -34,7 +34,7 @@
      "version": "1.0.0.0",
      "download": {
        "url": "https://artemPGH.github.io/game-catalog/LoomCity_v1.0.0.3.zip",
-       "sha256": "04F9B0AA06646A924E65F5EBC108F64F25B9121A0B310F9A6E754F0C99FF2A761"
+       "sha256": "049f90aa06646a924e655febc108f6425b9121a0b310f9a6e754f0c99ff2a761"
      },
      "exec": { "win": "LoomCity.exe" },
      "icon": "https://artemPGH.github.io/game-catalog/icons/loom_city.png?v=20251122",
