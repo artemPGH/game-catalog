@@ -9,7 +9,7 @@
       "sha256": "261377b8ecf70ca7dbb8d92e5ebadb2a9711c69c5c462cf9908b4cff0004b08d"
     },
     "exec": {
-      "win": "LoomPerson.exe"
+      "win": "loom_person_v1.0.0.4.exe"
     },
     "icon": "https://artemPGH.github.io/game-catalog/icons/loom_person.png?v=20260101",
     "cover": "https://artemPGH.github.io/game-catalog/covers/loom_person.png?v=20260101",
